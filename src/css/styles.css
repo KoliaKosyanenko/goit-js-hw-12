@@ -1,0 +1,120 @@
+@import url('./reset.css');
+@import url('./loader.css');
+
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #242424;
+  background-color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+#search-form {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  margin-bottom: 32px;
+}
+
+.srch-btn {
+  width: 91px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgb(78, 117, 255);
+  border: none;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.03em;
+}
+
+.srch-btn:hover,
+.srch-btn:focus {
+  background: rgb(108, 140, 255);
+}
+
+.srchForm {
+  width: 272px;
+  height: 40px;
+  box-sizing: border-box;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 4px;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.03em;
+  padding: 8px 16px;
+}
+
+.srchForm:hover {
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.srchForm::placeholder {
+  color: rgb(128, 128, 128);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.03em;
+}
+
+.gallery {
+  display: flex;
+  gap: 24px;
+  justify-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.gallery-container {
+  box-sizing: border-box;
+  border: 1px solid rgb(128, 128, 128);
+  max-width: 360px;
+}
+
+.gallery-container .gallery-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 20px;
+  text-align: center;
+}
+
+.card-text > span {
+  color: rgb(46, 47, 66);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.07em;
+}
+
+.card-text {
+  color: rgb(46, 47, 66);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.07em;
+}
+
+img {
+  width: 360px;
+  height: 200px;
+  object-fit: cover;
+}
