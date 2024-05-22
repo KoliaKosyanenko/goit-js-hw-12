@@ -118,3 +118,27 @@ img {
   height: 200px;
   object-fit: cover;
 }
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin: 32px 0;
+}
+
+.load-btn {
+  width: 125px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgb(78, 117, 255);
+  border: none;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.03em;
+}
+
+.load-btn:hover,
+.load-btn:focus {
+  background: rgb(108, 140, 255);
+}
