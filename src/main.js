@@ -1,4 +1,3 @@
-
 import { searchImages } from './js/pixabay-api.js';
 import {
   showError,
@@ -10,7 +9,7 @@ import {
 
 document.addEventListener('DOMContentLoaded', function () {
   const searchForm = document.getElementById('search-form');
-  searchForm.addEventListener('submit', function (event) {
+  searchForm.addEventListener('submit', async function (event) {
     event.preventDefault();
     clearGallery();
     const searchInput = document.getElementById('search-input');
@@ -18,25 +17,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (query !== '') {
       showLoading();
-
-      searchImages(query)
-        .then(images => {
-          hideLoading();
-
-          if (images.length === 0) {
+      try {
+        const images = await searchImages(query);
+         hideLoading();
+        if (images.length === 0) {
             showError(
               'Sorry, there are no images matching your search query. Please try again!'
             );
           } else {
             renderGallery(images);
           }
-        })
-        .catch(error => {
-          hideLoading();
-          showError(
-            'An error occurred while fetching data. Please try again later.'
-          );
-        });
+      }
+      catch (error) {
+        hideLoading();
+            showError(
+              'An error occurred while fetching data. Please try again later.'
+            );
+      }
     } else {
       showError('Please enter a search query.');
     }
