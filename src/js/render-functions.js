@@ -17,6 +17,10 @@ function getLoaderElement() {
   return document.querySelector('.loader');
 }
 
+function getLoadMoreBtn() {
+  return document.getElementById('load-more');
+}
+
 export function renderGallery(images) {
   const galleryElement = getGalleryElement();
   const cardsHtml = images.map(image => {
@@ -49,6 +53,16 @@ export function renderGallery(images) {
   lightbox.refresh();
 }
 
+export function showMoreBtn() {
+  const moreBtn = getLoadMoreBtn();
+  moreBtn.style.display = 'block';
+}
+
+export function hideMoreBtn() {
+  const moreBtn = getLoadMoreBtn();
+  moreBtn.style.display = 'none';
+}
+
 export function clearGallery() {
   const galleryElement = getGalleryElement();
   galleryElement.innerHTML = '';
@@ -68,5 +82,6 @@ export function showError(message) {
   iziToast.error({
     title: 'Error',
     message: message,
+    position: 'topRight',
   });
 }
