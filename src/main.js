@@ -1,4 +1,4 @@
-import { searchImages } from './js/pixabay-api.js';
+import { PER_PAGE, searchImages } from './js/pixabay-api.js';
 import {
   showError,
   renderGallery,
@@ -7,21 +7,26 @@ import {
   clearGallery,
   showMoreBtn,
   hideMoreBtn,
+  showInfo,
 } from './js/render-functions.js';
+
 let page = 1;
+let totalPages = 0;
+let searchQuery = null;
+
 document.addEventListener('DOMContentLoaded', function () {
   const searchForm = document.getElementById('search-form');
   searchForm.addEventListener('submit', async function (event) {
     event.preventDefault();
     clearGallery();
     const searchInput = document.getElementById('search-input');
-    const query = searchInput.value.trim();
+    searchQuery = searchInput.value.trim();
 
-    if (query !== '') {
+    if (searchQuery !== '') {
       showLoading();
       try {
         page = 1;
-        const images = await searchImages(query, page);
+        const { images, totalImages } = await searchImages(searchQuery, page);
         hideLoading();
         if (images.length === 0) {
           showError(
@@ -29,7 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
           );
         } else {
           renderGallery(images);
-          showMoreBtn();
+
+          totalPages = Math.ceil(totalImages / PER_PAGE);
+          if (totalPages > 1) {
+            showMoreBtn();
+          }
         }
       } catch (error) {
         hideLoading();
@@ -43,33 +52,26 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   const loadMoreBtn = document.getElementById('load-more');
-  loadMoreBtn.addEventListener('click', async function (event) {
-    event.preventDefault();
-    const searchInput = document.getElementById('search-input');
-    const query = searchInput.value.trim();
-
-    if (query !== '') {
-      hideMoreBtn();
+  loadMoreBtn.addEventListener('click', async function () {
+    try {
+      page += 1;
       showLoading();
-      try {
-        page += 1;
-        const images = await searchImages(query, page);
-        hideLoading();
-        if (images.length === 0) {
-          showError(
-            'Sorry, there are no images matching your search query. Please try again!'
-          );
-        } else {
-          renderGallery(images);
-          showMoreBtn();
-          smoothScrollOnLoadMore();
-        }
-      } catch (error) {
-        hideLoading();
-        showError(error.message);
+
+      const { images } = await searchImages(searchQuery, page);
+
+      renderGallery(images);
+
+      hideLoading();
+      smoothScrollOnLoadMore();
+
+      // Hide button if reach end of collection
+      if (page >= totalPages) {
+        showInfo("We're sorry, but you've reached the end of search results.");
+        hideMoreBtn();
       }
-    } else {
-      showError('Please enter a search query.');
+    } catch (error) {
+      hideLoading();
+      showError(error.message);
     }
   });
 });

@@ -85,3 +85,11 @@ export function showError(message) {
     position: 'topRight',
   });
 }
+
+export function showInfo(message) {
+  iziToast.info({
+    title: 'Info',
+    message: message,
+    position: 'topRight',
+  });
+}
