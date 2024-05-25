@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiKey = '43687048-bb18a09d847445a540140347b';
-export const PER_PAGE = 200;
+export const PER_PAGE = 15;
 
 export async function searchImages(query, page) {
   const apiUrl = `https://pixabay.com/api/?key=${apiKey}&q=${query}
@@ -12,12 +12,6 @@ export async function searchImages(query, page) {
     if (response.status !== 200) {
       throw new Error('Network response was not ok');
     }
-    // if (page * PER_PAGE > response.data.totalHits) {
-    //   throw new Error(
-    //     "We're sorry, but you've reached the end of search results."
-    //   );
-    // }
-
     const { hits, totalHits } = response.data;
 
     return { images: hits, totalImages: totalHits };

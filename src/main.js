@@ -14,6 +14,8 @@ let page = 1;
 let totalPages = 0;
 let searchQuery = null;
 
+
+
 document.addEventListener('DOMContentLoaded', function () {
   const searchForm = document.getElementById('search-form');
   searchForm.addEventListener('submit', async function (event) {
