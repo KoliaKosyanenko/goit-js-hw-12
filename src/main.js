@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     searchQuery = searchInput.value.trim();
 
     if (searchQuery !== '') {
+      hideMoreBtn();
       showLoading();
       try {
         page = 1;
